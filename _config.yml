@@ -28,8 +28,9 @@ twitter_username: astnmsn
 github_username: astnmsn
 
 # Build settings
-theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "neon"
+theme: minima
+minima:
+  skin: dark
 plugins:
   - jekyll-feed
 # Exclude from processing.
