@@ -1,6 +1,6 @@
 #### Dealing with the limits of hardware
 
-![[Database Storage 2022-11-10 10.46.08.excalidraw]]
+![Hardware latencies](../assets/Database%20Storage%202022-11-10%2010.46.08.excalidraw.svg)
 
 A Disk based architecture assumes that the primary storage location of the database is on non-volatile disk
 This requires the system to coordinate the movement of data between disk and main memory
@@ -16,7 +16,7 @@ The cognitive and latency overhead associated with this managing this is signifi
 
 #### Buffer Pools
 
-![[Database Storage 2022-11-10 11.00.25.excalidraw]]
+![Buffer Pool](../assets/Database%20Storage%202022-11-10%2011.00.25.excalidraw.svg)
 
 List of pages stored in main memory that stores the file pages as they are brought into memory for operations, as well as all the metadata needed to track these pages.
 	Note: This should sound a lot like the concept of Virtual Memory in the OS, but the database is maintaining this on it's own because it has knowledge that will allow it to manage this memory more efficiently than the OS. Realistically, mmap would be good enough for read only work loads, but performance is significantly worse when we have multiple writers
@@ -36,7 +36,6 @@ List of pages stored in main memory that stores the file pages as they are broug
 		1. **Translation Lookaside Buffer** - memory cache that stores the recent translations of virtual memory to physical memory (1 per core)
 		2. **Shootdown** - when a process/core changes the mapping, it must invalidate the cache entry (so that other threads/cores do not attempt to access invalid pages on disk)
 
----
 ## File System
 
 DBMS stores a database as one or more files on disk (typically in a proprietary format). The OS is completely ignorant of the contents of these files
@@ -60,7 +59,7 @@ DBMS stores a database as one or more files on disk (typically in a proprietary 
 - Each page is given a unique id
 	- An indirection layer is used to male page ids to physical locations
 
-##### 3 Notions of a "Page"
+3 Notions of a "Page"
 1. Hardware page (usually 4KB)
 	-  Smallest amount of data that the OS guarantees it can write out atomically
 2. OS Page (also usually 4KB, meant to correlate with HW page)
@@ -90,7 +89,7 @@ At this level the manager doesn't need to be aware of what is inside the pages
 
 #### Page Structure
 
-![[Database Storage 2022-11-10 17.09.13.excalidraw]]
+![Page Layout](../assets/Database%20Storage%202022-11-10%2017.09.13.excalidraw.svg)
 
 ##### Header
 - Page Size
@@ -107,7 +106,7 @@ At this level the manager doesn't need to be aware of what is inside the pages
 ##### Tuple Oriented Layout
 Slotted Pages
 - Supports variable length tuples
-- Slot array at the beginning of the page (following the header) 
+- Slot array at the beginning of the page (following the header)
 - Each slot
 	- maps to the tuples' starting position offset within the page
 	- stores the length of the tuple that it maps to
@@ -156,11 +155,11 @@ Problems with slotted page design
 - Useless Disk I/O
 	- must bring in the entire page to update a single tuple in the page
 - Random disk I/O
-	- random layout could lead to updating a page per tuple 
+	- random layout could lead to updating a page per tuple
 
 
 
-##### Log Oriented Layout
+#### Log Oriented Layout
 
 What if the DBMS could not overwrite data in pages, but could only create new pages?
 
@@ -201,7 +200,7 @@ Compaction
 	- Compaction occurs dependent on log file sizes
 	- Smallest files are compacted at level 0, can compact output with another file at level 1
 
-![[Database Storage 2022-11-11 10.11.33.excalidraw]]
+![Compaction Strategies](../assets/Database%20Storage%202022-11-11%2010.11.33.excalidraw.svg)
 
 Downsides
 - Write Amplification
@@ -210,7 +209,7 @@ Downsides
 	- Amplification - single insert can result in writing the record as many times as it takes part in compaction
 - Compaction is expensive
 
-##### Data Representation
+#### Data Representation
 
 INTEGER/BIGINT/SMALLINT/TINYINT
 - c/c++ representation
@@ -232,11 +231,12 @@ Large Values (Most systems do not allow a tuple to exceed the size of a single p
 	- Does not maintain transactional and durability guarantees of pages/files managed by the dbms
 
 System Catalogs
+
 The dBMS stores metadata about databases in its internal catalogs
 - tables, columns, indexes, views
 - users & permissions
 - internal statistics
 Most databases store this info inside itself (as metadata tables -> INFORMATION_SCHEMA)
 - Wrap object abstraction around tuples
-- Specialized code for "bootstrapping" catalog tables 
+- Specialized code for "bootstrapping" catalog tables
 	- chicken before the egg, how to interact with these tables without knowing anything about the database itself?
