@@ -5,7 +5,7 @@ date:   2022-11-10 14:01:17 -0700
 categories: CMU Intro To Databases
 ---
 
-Note: These are note from the CMU 15-445-645 (Spring 2022) lectures [3](https://www.youtube.com/watch?v=df-l2PxUidI) & [4](https://www.youtube.com/watch?v=2HtfGdsrwqA)
+Note: These are notes from the CMU 15-445-645 (Spring 2022) lectures [3](https://www.youtube.com/watch?v=df-l2PxUidI) & [4](https://www.youtube.com/watch?v=2HtfGdsrwqA)
 
 #### Dealing with the limits of hardware
 
