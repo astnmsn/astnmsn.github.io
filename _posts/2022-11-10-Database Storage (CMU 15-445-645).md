@@ -1,6 +1,6 @@
 #### Dealing with the limits of hardware
 
-![Hardware latencies](../assets/Database%20Storage%202022-11-10%2010.46.08.excalidraw.svg)
+![Hardware latencies](/assets/Database%20Storage%202022-11-10%2010.46.08.excalidraw.svg)
 
 A Disk based architecture assumes that the primary storage location of the database is on non-volatile disk
 This requires the system to coordinate the movement of data between disk and main memory
@@ -16,7 +16,7 @@ The cognitive and latency overhead associated with this managing this is signifi
 
 #### Buffer Pools
 
-![Buffer Pool](../assets/Database%20Storage%202022-11-10%2011.00.25.excalidraw.svg)
+![Buffer Pool](/assets/Database%20Storage%202022-11-10%2011.00.25.excalidraw.svg)
 
 List of pages stored in main memory that stores the file pages as they are brought into memory for operations, as well as all the metadata needed to track these pages.
 	Note: This should sound a lot like the concept of Virtual Memory in the OS, but the database is maintaining this on it's own because it has knowledge that will allow it to manage this memory more efficiently than the OS. Realistically, mmap would be good enough for read only work loads, but performance is significantly worse when we have multiple writers
@@ -89,7 +89,7 @@ At this level the manager doesn't need to be aware of what is inside the pages
 
 #### Page Structure
 
-![Page Layout](../assets/Database%20Storage%202022-11-10%2017.09.13.excalidraw.svg)
+![Page Layout](/assets/Database%20Storage%202022-11-10%2017.09.13.excalidraw.svg)
 
 ##### Header
 - Page Size
@@ -200,7 +200,7 @@ Compaction
 	- Compaction occurs dependent on log file sizes
 	- Smallest files are compacted at level 0, can compact output with another file at level 1
 
-![Compaction Strategies](../assets/Database%20Storage%202022-11-11%2010.11.33.excalidraw.svg)
+![Compaction Strategies](/assets/Database%20Storage%202022-11-11%2010.11.33.excalidraw.svg)
 
 Downsides
 - Write Amplification
