@@ -14,7 +14,7 @@ Typical Hash Table implementation
 - For a database constants matter, so it is important to optimize the O(1)
 - Often worth it to trade additional space to reduce the constant factor
 
-#### Hash Functions
+### Hash Functions
 - How to map a large key space into a smaller domain of integers (index into the array)
 	- Lose ordering in the process
 - Trade off between being fast and reducing collision rate
@@ -22,12 +22,12 @@ Typical Hash Table implementation
 - Others: CRC-64, MurmurHash, Google CityHash, Facebook XXHash, Google FarmHash
 - Do not use cryptographic hash functions for databases, overhead is not worth it because the system does not require any of the beneficial properties
 
-#### Hashing Scheme
+### Hashing Scheme
 - How to handle key collisions after hashing
 - Trade off between allocating a large hash table and additional instruction go get/put keys
 	- Collisions require finding another place for inserting a key/value, or traversing alternative locations when the space is filled by a different key than is being queried
 
-##### Static Hashing
+#### Static Hashing
 Require the DBMS to know the number of elements it wants to store, or rebuild the entire backing structures when there is overflow to allow for additional data
 
 None unique keys (joins)
@@ -54,7 +54,7 @@ Cuckoo Hashing
 	- If no table has a free slot, evict the element from one of them and then e-hash it and find a new open location for it
 	- Look-ups and deletion are always O(1) because only one location per hash table is checked
 
-##### Dynamic Hashing
+#### Dynamic Hashing
 
 Tables resize themselves on demand (per insert/delete, no big bang reconstruction)
 
