@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Storage Models & Compression"
-date:   2022-11-10 14:01:17 -0700
 categories: CMU Intro To Databases
 ---
 
@@ -110,7 +109,7 @@ Granularity
 		- Bitmap Encoding
 			- For low cardinality columns, store a separate bitmap for each unique value for an attribute where an offset in the vector corresponds to a tuple
 				- The i'th position in the bitmap is the i'th tuple in the table
-				- For an attribute with cardinality=4;  value \[3\] -> \[0, 0, 1, 0\]
+				- For an attribute with cardinality=4: value `[3] -> [0, 0, 1, 0]`
 				- Typically segmented into chunks to avoid allocating large blocks of contiguous memory
 			- Some systems provide bitmap indexes
 			- Every time an application inserts an unseen value, the system must extend all the bitmaps
